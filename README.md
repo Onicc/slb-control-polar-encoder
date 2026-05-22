@@ -39,8 +39,9 @@ because the available main PDF ends at that heading.
 ├── docs/control_info_encoder_design.md
 ├── docs/control_info_encoder_test_report.md
 ├── docs/table_c1_extraction_report.md
-├── SLB技术要求和测试方法.pdf
-└── 表 C.1 极化码的可靠度排序序列.pdf
+└── references/
+    ├── SLB技术要求和测试方法.pdf
+    └── 表 C.1 极化码的可靠度排序序列.pdf
 ```
 
 ## Build Requirements
@@ -181,14 +182,14 @@ The implementation uses an overflow-safe equivalent comparison.
 `src/polar_reliability_sequence.cpp` is generated from:
 
 ```text
-表 C.1 极化码的可靠度排序序列.pdf
+references/表 C.1 极化码的可靠度排序序列.pdf
 ```
 
 Regenerate it with:
 
 ```sh
 python3 tools/extract_c1_reliability.py \
-  "表 C.1 极化码的可靠度排序序列.pdf" \
+  "references/表 C.1 极化码的可靠度排序序列.pdf" \
   --cpp-out src/polar_reliability_sequence.cpp \
   --report-out docs/table_c1_extraction_report.md
 ```

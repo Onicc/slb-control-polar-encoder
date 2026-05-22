@@ -40,8 +40,9 @@ English README: [README.md](README.md)
 ├── docs/control_info_encoder_design.md
 ├── docs/control_info_encoder_test_report.md
 ├── docs/table_c1_extraction_report.md
-├── SLB技术要求和测试方法.pdf
-└── 表 C.1 极化码的可靠度排序序列.pdf
+└── references/
+    ├── SLB技术要求和测试方法.pdf
+    └── 表 C.1 极化码的可靠度排序序列.pdf
 ```
 
 ## 构建要求
@@ -179,14 +180,14 @@ else:
 `src/polar_reliability_sequence.cpp` 由以下 PDF 自动生成：
 
 ```text
-表 C.1 极化码的可靠度排序序列.pdf
+references/表 C.1 极化码的可靠度排序序列.pdf
 ```
 
 重新生成命令：
 
 ```sh
 python3 tools/extract_c1_reliability.py \
-  "表 C.1 极化码的可靠度排序序列.pdf" \
+  "references/表 C.1 极化码的可靠度排序序列.pdf" \
   --cpp-out src/polar_reliability_sequence.cpp \
   --report-out docs/table_c1_extraction_report.md
 ```

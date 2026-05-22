@@ -8,17 +8,17 @@ Date: 2026-05-22
 - Language standard: C++17
 - Build system: CMake
 - Compiler observed: Apple clang 17.0.0
-- Source standard reference: `SLB技术要求和测试方法.pdf`, section 6.2.6.1.5 and referenced common Polar-code sections 6.2.6.1.2 to 6.2.6.1.4
+- Source standard reference: `references/SLB技术要求和测试方法.pdf`, section 6.2.6.1.5 and referenced common Polar-code sections 6.2.6.1.2 to 6.2.6.1.4
 
 ## Important Conformance Note
 
-The workspace now includes `表 C.1 极化码的可靠度排序序列.pdf`. Table C.1 was
-converted into `src/polar_reliability_sequence.cpp` using
-`tools/extract_c1_reliability.py`. The extraction script parses both raw and
-layout `pdftotext` output, requires both paths to match exactly, and verifies
-8192 `(W, Q)` pairs with complete `0..8191` coverage and no duplicate `Q`
-values. The extraction details are recorded in
-`docs/table_c1_extraction_report.md`.
+The workspace now includes
+`references/表 C.1 极化码的可靠度排序序列.pdf`. Table C.1 was converted into
+`src/polar_reliability_sequence.cpp` using `tools/extract_c1_reliability.py`.
+The extraction script parses both raw and layout `pdftotext` output, requires
+both paths to match exactly, and verifies 8192 `(W, Q)` pairs with complete
+`0..8191` coverage and no duplicate `Q` values. The extraction details are
+recorded in `docs/table_c1_extraction_report.md`.
 
 External conformance vectors from the standard owner are still recommended for
 certification.

@@ -98,7 +98,7 @@ def format_report(sequence: list[int]) -> str:
     last16 = ", ".join(str(value) for value in sequence[-16:])
     return f"""# Table C.1 Extraction Report
 
-Source PDF: `表 C.1 极化码的可靠度排序序列.pdf`
+Source PDF: `references/表 C.1 极化码的可靠度排序序列.pdf`
 
 Extraction checks:
 

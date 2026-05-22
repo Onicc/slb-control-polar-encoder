@@ -19,7 +19,8 @@ already a `c_r(0)..c_r(K_r-1)` sequence. The implementation performs:
 
 The standard Table C.1 reliability sequence is integrated in
 `src/polar_reliability_sequence.cpp`. It was generated from
-`表 C.1 极化码的可靠度排序序列.pdf` by `tools/extract_c1_reliability.py`, which
+`references/表 C.1 极化码的可靠度排序序列.pdf` by
+`tools/extract_c1_reliability.py`, which
 cross-checks raw and layout `pdftotext` extraction paths and verifies that both
 `W` and `Q` cover `0..8191` exactly once.
 
