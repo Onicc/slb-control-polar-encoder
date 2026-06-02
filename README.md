@@ -32,9 +32,14 @@ because the available main PDF ends at that heading.
 .
 ├── CMakeLists.txt
 ├── include/slb/control_polar_encoder.hpp
+├── rtl/slb_control_polar_encoder.v
+├── rtl/slb_polar_tables.vh
 ├── src/control_polar_encoder.cpp
 ├── src/polar_reliability_sequence.cpp
+├── sim/cocotb/
 ├── tests/test_control_polar_encoder.cpp
+├── tests/cocotb/
+├── scripts/generate_rtl_tables.py
 ├── tools/extract_c1_reliability.py
 ├── docs/control_info_encoder_design.md
 ├── docs/control_info_encoder_test_report.md
@@ -49,6 +54,8 @@ because the available main PDF ends at that heading.
 - CMake 3.16 or newer
 - C++17 compiler
 - `pdftotext` from Poppler, only needed when regenerating Table C.1
+- Icarus Verilog, only needed for RTL simulation
+- Python 3.12 with venv, only needed for cocotb verification
 
 The implementation itself has no third-party runtime dependency.
 
@@ -67,6 +74,44 @@ Expected test result:
 100% tests passed, 0 tests failed
 Executed 21 tests successfully.
 ```
+
+## Verilog RTL And cocotb
+
+The Verilog implementation is in:
+
+```text
+rtl/slb_control_polar_encoder.v
+```
+
+It encodes one control-information block per transaction:
+
+```text
+c_r + K + E0 + E + rvid -> f_r
+```
+
+The generated RTL table include is:
+
+```text
+rtl/slb_polar_tables.vh
+```
+
+Regenerate it from the integrated C.1 table with:
+
+```sh
+python3 scripts/generate_rtl_tables.py
+```
+
+Create the cocotb virtual environment and run Icarus Verilog simulation:
+
+```sh
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r requirements-cocotb.txt
+PATH="$PWD/.venv/bin:$PATH" make -C sim/cocotb
+.venv/bin/python -m pytest tests/cocotb -q
+```
+
+See `docs/rtl/README.md` and `docs/rtl/verification_report.md` for the RTL
+interface and verification report.
 
 ## Main API
 

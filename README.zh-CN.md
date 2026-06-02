@@ -33,9 +33,14 @@ English README: [README.md](README.md)
 ├── README.md
 ├── README.zh-CN.md
 ├── include/slb/control_polar_encoder.hpp
+├── rtl/slb_control_polar_encoder.v
+├── rtl/slb_polar_tables.vh
 ├── src/control_polar_encoder.cpp
 ├── src/polar_reliability_sequence.cpp
+├── sim/cocotb/
 ├── tests/test_control_polar_encoder.cpp
+├── tests/cocotb/
+├── scripts/generate_rtl_tables.py
 ├── tools/extract_c1_reliability.py
 ├── docs/control_info_encoder_design.md
 ├── docs/control_info_encoder_test_report.md
@@ -50,6 +55,8 @@ English README: [README.md](README.md)
 - CMake 3.16 或更高版本
 - 支持 C++17 的编译器
 - Poppler 的 `pdftotext`，仅在重新生成表 C.1 时需要
+- Icarus Verilog，仅在 RTL 仿真时需要
+- Python 3.12 和 venv，仅在 cocotb 验证时需要
 
 编码库本身没有第三方运行时依赖。
 
@@ -67,6 +74,48 @@ ctest --test-dir build --output-on-failure
 ```text
 100% tests passed, 0 tests failed
 Executed 21 tests successfully.
+```
+
+## Verilog RTL 与 cocotb 验证
+
+Verilog 实现在：
+
+```text
+rtl/slb_control_polar_encoder.v
+```
+
+RTL 每次处理一个控制信息码块：
+
+```text
+c_r + K + E0 + E + rvid -> f_r
+```
+
+RTL 表文件为：
+
+```text
+rtl/slb_polar_tables.vh
+```
+
+从 C.1 表重新生成 RTL 表：
+
+```sh
+python3 scripts/generate_rtl_tables.py
+```
+
+创建 cocotb 虚拟环境并使用 Icarus Verilog 仿真：
+
+```sh
+python3.12 -m venv .venv
+.venv/bin/python -m pip install -r requirements-cocotb.txt
+PATH="$PWD/.venv/bin:$PATH" make -C sim/cocotb
+.venv/bin/python -m pytest tests/cocotb -q
+```
+
+RTL 接口和验证报告见：
+
+```text
+docs/rtl/README.md
+docs/rtl/verification_report.md
 ```
 
 ## 主要 API
